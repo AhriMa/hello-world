@@ -1,0 +1,67 @@
+---
+title: "A02a_G33821119"
+author: "LM"
+date: "1/30/2018"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+part b (a)
+ load libraries.
+```{r }
+
+library(dplyr)
+library(tidyverse)
+library(ggplot2)
+
+```
+
+ inport the csv document from computer.
+```{r }
+supermarket<-read_csv("/Users/malaisi/Desktop/programming analytics/SupermarketTransactions.csv")
+
+```
+
+
+
+
+```{r}
+#normalize the date
+supermarket$`Purchase Date`<- as.Date(supermarket$`Purchase Date`, format = "%m/%d/%Y")
+
+# search for rows of puchases in Jan and Feb,2008. 
+jan <- grep(pattern = '2008-01.*', supermarket$`Purchase Date`)
+feb <- grep(pattern = '2008-02.*', supermarket$`Purchase Date`)
+
+#Create bar chart of counts for Units Sold and a histogram of Revenue.
+plot(factor(supermarket$'Units Sold'[c(jan,feb)]),col="pink",main="Bar Chart of Units Sold",xlab="Units Sold")
+hist(supermarket$Revenue[c(jan,feb)],col="pink",main="Histogram of Revenue",xlab = "Revenue")
+
+```
+
+
+
+part b (b)
+
+```{r}
+# find subpopulation of married female homeowners in the state of CA
+sub <- supermarket %>% filter(Gender == "F") %>% filter(`Marital Status` == "M") %>% filter(Homeowner == "Y") %>% filter(`State or Province` == "CA")
+
+# plot bar chart of counts for Units Sold and a histogram of Revenue.
+#factor is used for categorical data.
+plot(factor(sub$`Units Sold`),col="lightpink",main="Bar Chart of Units Sold",xlab="Units Sold")
+hist(sub$Revenue,col="pink",main="Histogram of Revenue",xlab = "Revenue")
+
+```
+
+
+
+Summary:
+
+In part a, the bar chart of units sold is like normal distribution. From the histogram of revenue we can see that its distributiuon is right skewed, which means the majority of customers can only generate less than $20 in a single puchase.
+In part b, the graphs look similiar with part a's, which means either we sample by date or by population, the distributions of units sold and revenue are similar.
+

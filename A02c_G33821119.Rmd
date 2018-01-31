@@ -1,0 +1,73 @@
+---
+title: "A02c_G33821119"
+author: "LM"
+date: "1/30/2018"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+
+Samplingframe is a combination of two sample, r1 and r2 from two different normal distribution respectively, one of which with mean 25 and standard deviation 4, the other, 10, 3. The resulting histogram shows two peaks.
+```{r }
+
+rnorm2 <- function(n,mean,sd) { mean+sd*scale(rnorm(n)) } 
+set.seed(1239) 
+r1 <- rnorm2(100,25,4) 
+r2 <- rnorm2(50,10,3) 
+samplingframe <- c(r1,r2) 
+hist(samplingframe, breaks=20,col = "pink")
+
+
+
+```
+
+part C (b)
+Draw 50 samples of size 15 from the sampling frame in part a, and plot the sampling distribution of means as a histogram.  
+
+```{r }
+mean1 <- c()
+for(i in 1 : 50){
+mean1[i] <- mean(sample(x = samplingframe, size = 15))
+}
+hist(mean1, col ="pink")
+
+```
+
+part C (c)
+Draw 50 samples of size 45 from the sampling frame in part a, and plot the sampling distribution of means as a histogram. 
+
+```{r}
+
+mean2 <- c()
+for(i in 1 : 50){
+  mean2[i] <- mean(sample(x = samplingframe, size = 45))
+}
+hist(mean2, col = "lightgreen")
+```
+
+
+
+part C (d)
+
+
+```{r}
+hist(samplingframe, breaks=20,col = "pink")
+par(mfrow = c(1,2)) #draw 2 graphs in 1 row
+hist(mean1, col = "blue")
+hist(mean2, col = "green")
+
+  
+```
+
+The population distribution, has two peaks,
+whereas distributions of mean1 and mean2 have one peak, and the first more spread out than the second.
+
+part C (e)
+When sample size is large, the sample mean is normally distributed, with mean equals the population mean, and standard deciation the population standard deviation devided by root of sample size, no matter what the population distribution looks like.
+
+part C (f)
+It is helpful to illustrate CLT. Because, we start from a distribution with two peaks, draw sample from it, and the distribution of mean looks like a normal distribution. It would be more helpful if more sample are drawn so the histogram is more smooth. 

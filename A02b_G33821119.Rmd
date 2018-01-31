@@ -1,0 +1,65 @@
+---
+title: "A02b_G33821119"
+author: "LM"
+date: "1/27/2018"
+output: html_document
+---
+Part A
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Install tidyverse package.
+
+```{r }
+#install.packages("tidyverse")
+library(tidyverse)
+```
+
+## read the file
+
+```{r }
+households<-read_csv(file = "/Users/malaisi/Desktop/programming analytics/households.csv")
+
+```
+
+part a(a).
+Categorical variables:  Location, Ownership,Household
+Continuous variables: First Income, Second Income, Monthly Payment,Utilities, Debt.
+
+part a(b).
+All the variables in the categorical variables in this data frame are nominal variables.
+
+part a(c).
+```{r }
+ 
+ hist(households$Debt,col="light green",main="Debt Histogram", ylab="Amount",xlab="Debt",breaks=200)
+
+```
+
+
+
+it is like a symmetric distribution, and most of the debt are between 1700-7000.
+
+
+
+part a(d).
+```{r}
+sprintf("The maximum debt level for the households: %s", max(households$Debt))#to print the maximum debt level
+sprintf("The minimux debt level for the households: %s", min(households$Debt))# to print the minimum debt level
+```
+
+part a(e).
+```{r}
+sprintf("Indebtedness levels at 25th percentiles: %s", quantile(households$Debt,.25))
+sprintf("Indebtedness levels at 50th percentiles: %s", quantile(households$Debt,.50))
+sprintf("Indebtedness levels at 75th percentiles: %s", quantile(households$Debt,.75))
+
+```
+
+part a(f).
+```{r}
+sprintf("interquartile range for the indebtedness levels of households is: %s", IQR(households$Debt))
+
+```
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
